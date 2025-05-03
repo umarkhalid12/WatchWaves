@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, Alert } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Image, Alert, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
 import GradientTextInput from '../components/customInput';
 import SimpleButton from '../components/simpleButton';
 import TextButton from '../components/textButton';
@@ -16,15 +16,19 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
     const navigation = useNavigation();
+    const [loading, setloading]=useState(false);
 
-    const handleLogin = (values, { resetForm }) => { 
+    const handleLogin = (values, { resetForm }) => {
+        setloading(true); 
         signInWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => { 
                 navigation.navigate('DrawerNavigator');
                 resetForm();
+                setloading(false);
             })
             .catch((error) => {
                 Alert.alert("Login failed", error.message);
+                setloading(false);
             });
     };
 
@@ -36,7 +40,7 @@ const Login = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleLogin}  
             >
-                {({ handleChange, handleBlur, handleSubmit, values, errors, touched, resetForm }) => ( // Destructure resetForm here
+                {({ handleChange, handleBlur, handleSubmit, values, errors, touched, resetForm }) => ( 
                     <>
                         <GradientTextInput
                             placeholder="Email"
@@ -58,7 +62,12 @@ const Login = () => {
                         {touched.password && errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
                         <View style={styles.btnStyle}>
+                            {
+                                loading? <ActivityIndicator size={22} color='#f9bc50'/>
+                            :
                             <SimpleButton title="Login" onPress={handleSubmit} />
+                            }
+                            
                         </View>
                     </>
                 )}
@@ -98,5 +107,6 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 12,
         marginBottom: 5,
+        
     }
 });

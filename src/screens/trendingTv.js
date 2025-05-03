@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, Image, ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
-import { getTrendingTvShows } from "../services/api"; // Import the getTrendingTvShows function
+import { getTrendingTvShows } from "../services/api"; 
 import { useNavigation } from "@react-navigation/native";
+import TextButton from "../components/textButton";
 
 const TrendingTvShows = () => {
   const [tvShows, setTvShows] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // Added error state for better error handling
+  const [error, setError] = useState(null); 
   const navigation = useNavigation();
 
   useEffect(() => {
     const fetchTvShows = async () => {
       try {
-        const data = await getTrendingTvShows(); // Fetch trending TV shows data
-        setTvShows(data); // Set fetched TV shows data to state
+        const data = await getTrendingTvShows(); 
+        setTvShows(data); 
       } catch (err) {
-        setError("Failed to fetch trending TV shows. Please try again later."); // Set error message if fetching fails
+        setError("Failed to fetch trending TV shows. Please try again later."); 
       } finally {
-        setLoading(false); // Set loading to false after fetch completes (successful or error)
+        setLoading(false); 
       }
     };
-    fetchTvShows(); // Call the function to fetch data
+    fetchTvShows(); 
   }, []);
+
+  const truncateTitle = (title) => {
+    const words = title.split(" ");
+    return words.length > 3 ? words.slice(0, 3).join(" ") + "..." : title;
+  };
 
   const renderTvShowItem = ({ item }) => (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate("searchStack", {
           screen: "TvShowDetail",
-          params: { tvShowId: item.id }, // Pass tvShowId to the detail screen
+          params: { tvShowId: item.id }, 
         })
       }
     >
@@ -39,18 +45,26 @@ const TrendingTvShows = () => {
             style={styles.poster}
           />
         )}
-        <Text style={styles.tvShowTitle}>{item.name}</Text>
+        <Text style={styles.tvShowTitle}>{truncateTitle(item.name)}</Text>
       </View>
     </TouchableOpacity>
   );
 
-  if (loading) return <ActivityIndicator size="large" color="#E50914" />; // Display loading indicator
+  if (loading) return <ActivityIndicator size="large" color="#f9bc50" />; 
 
-  if (error) return <Text style={styles.errorText}>{error}</Text>; // Show error message if there was an error during fetching
+  if (error) return <Text style={styles.errorText}>{error}</Text>; 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.sectionTitle}>🔥 Trending TV Shows</Text>
+    <View>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 151 }}>
+        <Text style={styles.sectionTitle}>Trending TV Shows</Text>
+        <TextButton
+          title="View All"
+          onPress={() => navigation.navigate('searchStack',{
+            screen: 'AllTVShows'
+          })}
+        />
+        </View>
       <FlatList
         data={tvShows}
         renderItem={renderTvShowItem}
@@ -63,12 +77,37 @@ const TrendingTvShows = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#121212", padding: 10 },
-  sectionTitle: { fontSize: 20, fontWeight: "bold", color: "#fff", marginVertical: 10 },
-  tvShowCard: { marginRight: 10, alignItems: "center" },
-  poster: { width: 120, height: 180, borderRadius: 10 },
-  tvShowTitle: { color: "#fff", marginTop: 5, width: 120, textAlign: "center" },
-  errorText: { color: "#FF0000", textAlign: "center", fontSize: 16, marginTop: 20 }, // Error text style
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#4e5b60",
+    marginVertical: 10,
+    marginLeft: 10,
+  },
+  tvShowCard: {
+    marginRight: 8,
+    alignItems: "center",
+    left: 8
+  },
+  poster: {
+    width: 120,
+    height: 180,
+    borderRadius: 10
+  },
+  tvShowTitle: {
+    color: "black",
+    marginTop: 5,
+    width: 120,
+    textAlign: "center",
+    fontWeight: "500",
+    fontSize: 13
+  },
+  errorText: {
+    color: "#FF0000",
+    textAlign: "center",
+    fontSize: 16,
+    marginTop: 20
+  },
 });
 
 export default TrendingTvShows;

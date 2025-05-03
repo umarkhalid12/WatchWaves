@@ -77,10 +77,10 @@ const PopularMovies = () => {
 
   return (
     <View>
-      <View style={{flexDirection:'row', alignItems:'center', gap: 177}}>
+      <View style={{flexDirection:'row', alignItems:'center', gap: 180}}>
       <Text style={styles.title}>Popular Movies</Text>
       <TextButton
-      title="See All"
+      title="View All"
       onPress={()=> navigation.navigate('searchStack',{
         screen:"AllMovies"
       })}/>

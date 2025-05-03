@@ -19,7 +19,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
       <ScrollView 
-      showsHorizontalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}>
       <TrendingMovies/>
       <UpcomingMovies/>
       <LatestMovies/>

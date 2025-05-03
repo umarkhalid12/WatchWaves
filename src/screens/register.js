@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { auth } from '../../firebaseConfig';
@@ -21,15 +21,19 @@ const validationSchema = Yup.object().shape({
 
 const Register = () => {
     const navigation = useNavigation();
+    const [loading, setloading] = useState();
 
     const handleRegister = (values, { resetForm }) => {
+        setloading(true);
         createUserWithEmailAndPassword(auth, values.email, values.password)
             .then(() => {
-                resetForm(); 
+                resetForm();
+                setloading(false);
                 navigation.navigate('DrawerNavigator');
             })
             .catch((error) => {
                 Alert.alert("Registration failed", error.message);
+                setloading(false);
             });
     };
 
@@ -87,7 +91,11 @@ const Register = () => {
                         {touched.repassword && errors.repassword && <Text style={styles.errorText}>{errors.repassword}</Text>}
 
                         <View style={styles.btnStyle}>
-                            <SimpleButton title="Register" onPress={handleSubmit} />
+                            {
+                                loading ? <ActivityIndicator size={22} color='#f9bc50' />
+                                    :
+                                    <SimpleButton title="Register" onPress={handleSubmit} />
+                            }
                         </View>
                     </>
                 )}

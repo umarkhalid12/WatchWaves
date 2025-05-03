@@ -73,7 +73,7 @@ const PopularTvShows = () => {
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 158 }}>
         <Text style={styles.sectionTitle}>Popular TV Shows</Text>
         <TextButton
-          title="See All"
+          title="View All"
           onPress={() => navigation.navigate('searchStack',{
             screen: 'AllTVShows'
           })}
