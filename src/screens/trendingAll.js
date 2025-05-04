@@ -164,7 +164,10 @@ const TrendingAll = () => {
         >
           <MaterialIcons name="info-outline" size={22} color="black" />
         </TouchableOpacity>
-        <CustomButton title="WATCH NOW" />
+        <CustomButton title="WATCH NOW"
+       onPress={() => navigation.navigate("searchStack", {
+        screen: "Watch"
+      })} />
         <TouchableOpacity
           onPress={() => {
             console.log("Current favorites:", favorites); 
@@ -211,6 +214,7 @@ const styles = StyleSheet.create({
   },
   genreText: {
     fontSize: 10,
+    textAlign:'center'
   },
   loadingContainer: {
     flex: 1,

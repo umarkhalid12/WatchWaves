@@ -8,6 +8,7 @@ import AllMovies from '../screens/allMovies';
 import TvShowDetailScreen from '../screens/tvShowDetails';
 import AllTvShows from '../screens/allTvShows';
 import Favourite from '../screens/favourite';
+import Watch from '../screens/watch';
 
 const Stack =createStackNavigator();
 const SearchStack = () => {
@@ -20,6 +21,7 @@ const SearchStack = () => {
       <Stack.Screen name="TvShowDetail" component={TvShowDetailScreen} options={{headerShown:false}}/>
       <Stack.Screen name="AllTVShows" component={AllTvShows} options={{headerShown:false}}/>
       <Stack.Screen name="Favourite" component={Favourite} options={{headerShown:false}}/>
+      <Stack.Screen name="Watch" component={Watch} options={{headerShown:false}}/>
     </Stack.Navigator>
   )
 }

@@ -17,6 +17,7 @@ const SimpleInput = ({ placeholder, value, onChangeText,onSubmitEditing }) => {
           style={styles.input}
           value={value}
           placeholder={placeholder}
+          placeholderTextColor="#bdc3c7"
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
           onFocus={() => setIsFocused(true)}
@@ -33,9 +34,8 @@ const styles = StyleSheet.create({
   gradientBorder: {
     padding: 2,
     borderRadius: 10,
-    width: '80%',
-    alignSelf: 'center',
-    marginTop: 15,
+    width: '85%',
+    alignItems: 'center',
   },
   inputContainer: {
     backgroundColor: 'white',

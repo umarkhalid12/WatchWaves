@@ -63,7 +63,9 @@ const AllMovies = () => {
     >
       <View style={styles.posterWrapper}>
         <Image
-          source={{ uri: `https://image.tmdb.org/t/p/w500${item.poster_path}` }}
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+          }}
           style={styles.poster}
         />
       </View>

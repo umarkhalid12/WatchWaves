@@ -21,16 +21,16 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 5,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 200,
+    width: 155,
   },
   buttonText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight:'700'
   },
 });
