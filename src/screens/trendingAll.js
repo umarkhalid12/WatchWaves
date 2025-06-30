@@ -32,6 +32,7 @@ const TrendingAll = () => {
   useEffect(() => {
     const fetchTrending = async () => {
       const data = await getTrendingAll();
+      console.log("daat is ", data )
       setTrendingData(data);
       setLoading(false);
 

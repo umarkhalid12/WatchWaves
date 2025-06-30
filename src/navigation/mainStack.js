@@ -1,29 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import AuthStack from './authStack';
-import HomeStack from './homeStack';
+import { StyleSheet, View, Text } from 'react-native';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import DrawerNavigator from './drawer';
-import DrawerStack from './drawerStack';
 import searchStack from './searchStack';
+import AuthStack from './authStack';
 
+const Stack = createStackNavigator();
 
-const Stack= createStackNavigator();
 const MainStack = () => {
   return (
-    <Stack.Navigator>
-     
-      <Stack.Screen name="authStack" component={AuthStack} options={{headerShown:false}}/>
-      <Stack.Screen
-        name="DrawerNavigator"
-        component={DrawerNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="searchStack" component={searchStack} options={{headerShown:false}}/>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      <Stack.Screen name="searchStack" component={searchStack} />
+      <Stack.Screen name="authStack" component={AuthStack} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export default MainStack
+export default MainStack;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

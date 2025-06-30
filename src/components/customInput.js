@@ -45,6 +45,7 @@ const GradientTextInput = ({ placeholder, value, onChangeText, secureTextEntry, 
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={isPasswordVisible}
+          cursorColor="#f9bc50"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />

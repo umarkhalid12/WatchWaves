@@ -1,18 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Splash from '../screens/splash';
 import MainStack from './mainStack';
+import AuthStack from './authStack';
+import { useAuth } from '../services/authContext';
 
 const RootStack = () => {
-const [loading, setloading] =useState(false);
+  const { userToken, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
-     <NavigationContainer>
-      {loading? <Splash/>: <MainStack/>}
-     </NavigationContainer>
-  )
-}
+    <NavigationContainer>
+      {userToken ? <MainStack /> : <AuthStack />}
+    </NavigationContainer>
+  );
+};
 
-export default RootStack
+export default RootStack;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

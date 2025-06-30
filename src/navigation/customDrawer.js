@@ -5,10 +5,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../assets/colors';
 import { auth } from '../../firebaseConfig';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const CustomDrawer = (props) => {
   // Reference to track if component is mounted
   const isMounted = useRef(true);
+  const navigation =useNavigation();
 
   // Listen for auth state changes to redirect after logout
   useEffect(() => {
@@ -37,6 +39,7 @@ const CustomDrawer = (props) => {
       Alert.alert(
         "Logout Confirmation",
         "Do you really want to logout?",
+        
         [
           {
             text: "No",
@@ -51,21 +54,17 @@ const CustomDrawer = (props) => {
     }
   };
 
-  // Perform logout
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        if (isMounted.current) {
-          console.log("User signed out successfully");
-        }
-      })
-      .catch((error) => {
-        if (isMounted.current) {
-          console.error("Logout error:", error);
-          Alert.alert("Logout Failed", error.message);
-        }
-      });
-  };
+const handleLogout = async () => {
+  try {
+    
+    navigation.navigate('authStack',{
+      screen: 'Login'
+    })
+  } catch (error) {
+    console.error('Logout error:', error);
+    Alert.alert('Logout Failed', error.message);
+  }
+};
 
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1, backgroundColor: '#F5EDE7' }}>

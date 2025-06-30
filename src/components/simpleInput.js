@@ -19,6 +19,7 @@ const SimpleInput = ({ placeholder, value, onChangeText,onSubmitEditing }) => {
           placeholder={placeholder}
           placeholderTextColor="#bdc3c7"
           onChangeText={onChangeText}
+          cursorColor="#f9bc50"
           onSubmitEditing={onSubmitEditing}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
