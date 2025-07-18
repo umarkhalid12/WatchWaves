@@ -29,8 +29,8 @@ const Register = () => {
     setloading(true);
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then(async (userCredential) => {
-        // Instead of navigating directly, call signIn from Auth Context:
         await signIn(userCredential.user.uid);
+        navigation.navigate('DrawerNavigator');
 
         resetForm();
         setloading(false);
