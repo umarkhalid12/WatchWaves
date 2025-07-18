@@ -6,6 +6,7 @@ import tvSeries from '../screens/tvSeries';
 import Movie from '../screens/movie';
 import { colors } from '../assets/colors';
 import Genre from '../screens/genre';
+import Favourite from '../screens/favourite';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,8 +25,8 @@ export default function HomeStack() {
             else if(route.name === 'Movies'){
               iconName = 'movie';
             }
-            else if(route.name === 'Genre'){
-              iconName ='lightbulb-outline'
+            else if(route.name === 'Favourite'){
+              iconName ='favorite'
             }
 
             return <MaterialIcons name={iconName} size={22} color={color} />;
@@ -37,7 +38,7 @@ export default function HomeStack() {
         <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
         <Tab.Screen name="Movies" component={Movie} options={{headerShown: false}} />
         <Tab.Screen name="TV Series" component={tvSeries} options={{headerShown: false}} />
-        <Tab.Screen name="Genre" component={Genre} options={{headerShown: false}} />
+        <Tab.Screen name="Favourite" component={Favourite} options={{headerShown: false}} />
       </Tab.Navigator>
   );
 }
