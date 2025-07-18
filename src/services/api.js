@@ -2,7 +2,7 @@ import axios from 'axios'
 const API_KEY = "1aca40bcfe91e64acfadda72a1d5e52f";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-// Function to fetch standard data (like movies, shows, etc.)
+
 const fetchData = async (endpoint) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
@@ -25,13 +25,15 @@ const fetchGenres = async (endpoint) => {
   }
 };
 
-// ✅ New function for search results
+
+
+
 export const getSearchResults = async (query) => {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
     );
-    console.log('Search Results:', response.data); // Log the response to check data structure
+    console.log('Search Results:', response.data); 
     return response.data;
   } catch (error) {
     console.error("Error fetching search results:", error);

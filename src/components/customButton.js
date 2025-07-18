@@ -9,7 +9,7 @@ const CustomButton = ({ title, onPress }) => {
         colors={['#f9bc50', '#4e5b60']} 
         start={{ x: 0, y: 0 }} 
         end={{ x: 1, y: 1 }} 
-        style={styles.button}
+        style={styles.button}   
       >
         <Text style={styles.buttonText}>{title}</Text>
       </LinearGradient>
